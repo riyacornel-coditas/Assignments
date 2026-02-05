@@ -20,7 +20,7 @@ public class A6 {
 
         System.out.println("The names starting with A are:");
         names.stream()
-                .filter(name->name.startsWith("A"))
+                .filter(name->name.startsWith("A") || name.startsWith("a"))
                 .forEach(name->System.out.println(name));
 
         class SortInAlphabeticalOrder implements Comparator<String>
