@@ -4,6 +4,7 @@ import com.week7.task.entity.Patient;
 import com.week7.task.entity.PatientMedicalRecord;
 import com.week7.task.repository.PatientMedicalRecordRepository;
 import com.week7.task.repository.PatientRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,12 +33,13 @@ public class PatientService {
 
     public PatientMedicalRecord getHistory(Integer id) {
         Patient patient = patientRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Patient not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
         return patient.getMedicalRecord();
     }
 
     public Patient updatePatient(Integer id, Patient patient) {
-        Patient patient1 = patientRepo.findById(id).orElseThrow();
+        Patient patient1 = patientRepo.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Patient Not found"));
         patient1.setPatient_name(patient.getPatient_name());
         patient1.setPatient_age(patient.getPatient_age());
         patient1.setPatient_gender(patient.getPatient_gender());
@@ -49,7 +51,8 @@ public class PatientService {
     }
 
     public PatientMedicalRecord updateHistory(Integer id, PatientMedicalRecord updated) {
-        PatientMedicalRecord history = medicalRecord.findById(id).orElseThrow();
+        PatientMedicalRecord history = medicalRecord.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Patient Not found"));
         history.setAllergies(updated.getAllergies());
         history.setPast_Disease(updated.getPast_Disease());
         history.setCurrent_Medication(updated.getCurrent_Medication());

@@ -10,9 +10,11 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Patient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patient_Id;
+
     private String patient_name;
     private int patient_age;
     private String patient_gender;

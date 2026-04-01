@@ -14,6 +14,7 @@ public class PatientMedicalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int medical_Id;
+
     private String bloodGroup;
     private String allergies;
     private String past_Disease;
