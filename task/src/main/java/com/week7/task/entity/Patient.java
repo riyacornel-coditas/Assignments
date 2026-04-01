@@ -1,16 +1,14 @@
 package com.week7.task.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +21,6 @@ public class Patient {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_medical_record_id")
     private PatientMedicalRecord patient_medical_record;
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "patient_Id=" + patient_Id +
-                ", patient_name='" + patient_name + '\'' +
-                ", patient_age=" + patient_age +
-                ", patient_gender='" + patient_gender + '\'' +
-                ", phone_number=" + phone_number +
-                '}';
-    }
 
     public PatientMedicalRecord getMedicalRecord() {
 
