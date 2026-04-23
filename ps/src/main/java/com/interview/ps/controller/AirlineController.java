@@ -15,16 +15,16 @@ public class AirlineController {
 
     private final AirlineService airlineService;
 
-    @PostMapping("/add/airlines/{id}")
-    public String addAirlines( @RequestBody AddAirlines airlines)
+    @PostMapping("/add/{id}")
+    public String addAirlines(@PathVariable Long id, @RequestBody AddAirlines airlines)
     {
-        airlineService.addAirlines(airlines);
+        airlineService.addAirlines(id, airlines);
         return "Airlines added";
 
     }
 
     @GetMapping("/getall")
-    public List<AddAirlines> getAll()
+    public AddAirlines getAll()
     {
         return airlineService.getAll();
     }

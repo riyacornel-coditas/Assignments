@@ -1,5 +1,6 @@
 package com.interview.ps.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,12 @@ public class Aircraft {
 
     private String type;
 
-    //add seating capacity
+    private Integer capacity;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @JoinColumn(name = "airlineId")
+    private Airline airline;
 
 
 

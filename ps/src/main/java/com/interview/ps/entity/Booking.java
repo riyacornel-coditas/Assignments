@@ -1,5 +1,6 @@
 package com.interview.ps.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,16 +15,17 @@ public class Booking {
     @GeneratedValue
     private Long id;
 
-    Integer bookedSeats;
+    private String bookingStatus;
 
-    Integer amountPaid;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "userId")
     private Users users;
 
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "flightId")
     private Flight flight;
 

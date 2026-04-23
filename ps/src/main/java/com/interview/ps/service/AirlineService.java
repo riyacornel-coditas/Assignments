@@ -18,30 +18,32 @@ import java.util.List;
 public class AirlineService {
 
     private final AirlineRepository airlineRepository;
+    private final AirportRepository airportRepository;
 
     @Transactional
-    public void addAirlines(AddAirlines airlines) {
+    public void addAirlines(Long id, AddAirlines airlines) {
 
-        Airline a = new Airline();
-        a.setName(airlines.getName());
-        airlineRepository.save(a);
+        Airport airport = airportRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Airport not found"));
+        List<Airline> a = new ArrayList<>();
+        for(Airline airline: airlines.getAirlines()) {
+            Airline airline1 = new Airline();
+            airline1.setName(airline.getName());
+            airline1.setAirport(airport);
+
+            a.add(airline1);
+        }
+        airlineRepository.saveAll(a);
     }
 
     @Transactional
-    public List<AddAirlines> getAll()
+    public AddAirlines getAll()
     {
         List<Airline> airline = airlineRepository.findAll();
 
-        List<AddAirlines> airlinesList = new ArrayList<>();
+        AddAirlines a = new AddAirlines();
+        a.setAirlines(airline);
 
-        for(Airline air: airline)
-        {
-            AddAirlines a = new AddAirlines();
-            a.setName(air.getName());
-
-            airlinesList.add(a);
-        }
-
-        return airlinesList;
+        return a;
     }
 }

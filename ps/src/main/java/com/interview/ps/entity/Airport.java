@@ -21,6 +21,9 @@ public class Airport {
 
     private String location;
 
+    @OneToMany(mappedBy = "airport", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Airline> airlines = new ArrayList<>();
+
 
 
 }

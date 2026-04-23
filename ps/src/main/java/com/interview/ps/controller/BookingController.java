@@ -18,8 +18,9 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping("/make")
-    public void makeBooking(@RequestBody BookFlight bookFlight)
+    public String makeBooking(@RequestBody BookFlight bookFlight)
     {
         bookingService.bookFlight(bookFlight);
+        return "BOOKED";
     }
 }

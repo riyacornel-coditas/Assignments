@@ -2,12 +2,16 @@ package com.interview.ps.controller;
 
 import com.interview.ps.dto.AddAirlines;
 import com.interview.ps.dto.AddFlight;
+import com.interview.ps.entity.Flight;
 import com.interview.ps.repository.FlightRepository;
 import com.interview.ps.service.FlightService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/flights")
@@ -23,21 +27,28 @@ public class FlightController {
         return "Flight created";
     }
 
-    @PostMapping("/get/byorigin")
+    @GetMapping("/get/by/origin")
     public AddFlight getOrigin(@RequestParam String origin)
     {
         return flightService.findByOrigin(origin);
     }
 
-    @PostMapping("/get/bydestination")
+    @GetMapping("/get/by/destination")
     public AddFlight getDestination(@RequestParam String destination)
     {
         return flightService.findByDestination(destination);
     }
 
-    @PostMapping("/get/bydate")
-    public AddFlight getDate(@RequestParam LocalDate date)
+    @GetMapping("/get/by/date")
+    public AddFlight getDate(@RequestParam LocalDateTime date)
     {
         return flightService.findByDate(date);
     }
+
+    @GetMapping("/getall")
+    public Page<Flight> getFlights()
+    {
+        return flightService.getAll();
+    }
+    //how to convert page to list?
 }

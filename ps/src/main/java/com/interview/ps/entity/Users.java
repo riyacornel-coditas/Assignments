@@ -28,5 +28,9 @@ public class Users {
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<Booking> booking = new ArrayList<>();
 
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    private Payment payment;
+
+
 
 }

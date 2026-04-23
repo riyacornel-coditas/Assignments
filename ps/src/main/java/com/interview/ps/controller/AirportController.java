@@ -17,7 +17,7 @@ public class AirportController {
 
     private final AirportService airportService;
 
-    @PostMapping("/add/airport")
+    @PostMapping("/add")
     public String addAirport(@RequestBody AddAirport airport)
     {
         airportService.addAirport(airport);

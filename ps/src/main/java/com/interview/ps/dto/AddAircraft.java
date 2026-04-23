@@ -6,9 +6,13 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class AddAirport {
+public class AddAircraft {
+
     private String name;
-    private String location;
 
+    private String type;
 
+    private Integer capacity;
+
+    private Long airlineId;
 }

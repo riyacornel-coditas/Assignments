@@ -16,9 +16,18 @@ public class Payment {
 
     private String paymentMode;
 
+    private String paymentDetails;
+
+    private Double balance;
+
     private String paymentStatus;
 
     @OneToOne
     @JoinColumn(name = "bookingId")
     private Booking booking;
+
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private Users users;
+
 }

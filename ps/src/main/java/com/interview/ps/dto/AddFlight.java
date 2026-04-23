@@ -3,6 +3,7 @@ package com.interview.ps.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class AddFlight {
@@ -11,7 +12,9 @@ public class AddFlight {
 
     private String destination;
 
-    private LocalDate departureDate;
+    private LocalDateTime departureDate;
 
     private Integer totalSeats;
+
+    private Double price;
 }
