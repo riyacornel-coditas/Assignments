@@ -1,13 +1,14 @@
 package com.assignment.Week9.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,8 +23,15 @@ public class Session {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name="conferenceId")
     private Conference conference;
 
     @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "clientAdminId")
     private User clientAdmin;
+
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Attendance> attendance = new ArrayList<>();
 }

@@ -8,13 +8,15 @@ import com.assignment.Week9.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ConferenceService {
     private final ConferenceRepository repo;
     private final UserRepository userRepo;
 
-    public Conference createConference(ConferenceDto dto) {
+    public void createConference(ConferenceDto dto) {
         User admin = userRepo.findById(dto.getAdminId()).orElseThrow();
 
         Conference conf = new Conference();
@@ -22,6 +24,11 @@ public class ConferenceService {
         conf.setType(dto.getType());
         conf.setAdmin(admin);
 
-        return repo.save(conf);
+        repo.save(conf);
+    }
+
+    public List<Conference> viewConference() {
+
+        return repo.findAll();
     }
 }

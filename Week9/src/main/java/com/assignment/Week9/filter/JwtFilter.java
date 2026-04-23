@@ -33,13 +33,13 @@ public class JwtFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
 
             String token = header.substring(7);
-            String email = jwtUtil.extractEmail(token);
+            String username = jwtUtil.extractUsername(token);
 
-            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                UserDetails userDetails = userService.loadUserByUsername(email);
+                UserDetails userDetails = userService.loadUserByUsername(username);
 
-                if (jwtUtil.validateToken(token)) {
+                if (jwtUtil.validateToken(username, userDetails, token)) {
 
                     UsernamePasswordAuthenticationToken auth =
                             new UsernamePasswordAuthenticationToken(

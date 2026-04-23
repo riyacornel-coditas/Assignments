@@ -17,7 +17,7 @@ public class EnrollmentService {
     private final UserRepository userRepo;
     private final ConferenceRepository confRepo;
 
-    public Enrollment enroll(EnrollmentDto dto) {
+    public void enroll(EnrollmentDto dto) {
 
         User candidate = userRepo.findById(dto.getCandidateId()).orElseThrow();
         Conference conf = confRepo.findById(dto.getConferenceId()).orElseThrow();
@@ -26,6 +26,6 @@ public class EnrollmentService {
         enrollment.setCandidate(candidate);
         enrollment.setConference(conf);
 
-        return repo.save(enrollment);
+        repo.save(enrollment);
     }
 }

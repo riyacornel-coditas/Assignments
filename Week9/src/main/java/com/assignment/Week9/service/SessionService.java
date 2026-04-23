@@ -10,6 +10,8 @@ import com.assignment.Week9.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SessionService {
@@ -17,7 +19,7 @@ public class SessionService {
     private final ConferenceRepository confRepo;
     private final UserRepository userRepo;
 
-    public Session createSession(SessionDto dto) {
+    public void createSession(SessionDto dto) {
 
         Conference conf = confRepo.findById(dto.getConferenceId()).orElseThrow();
         User client = userRepo.findById(dto.getClientAdminId()).orElseThrow();
@@ -27,6 +29,11 @@ public class SessionService {
         session.setConference(conf);
         session.setClientAdmin(client);
 
-        return repo.save(session);
+        repo.save(session);
+    }
+
+    public List<Session> viewSession()
+    {
+        return repo.findAll();
     }
 }

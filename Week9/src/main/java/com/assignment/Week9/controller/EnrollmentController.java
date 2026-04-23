@@ -16,7 +16,8 @@ public class EnrollmentController {
     private final EnrollmentService service;
 
     @PostMapping
-    public Enrollment enroll(@RequestBody EnrollmentDto dto) {
-        return service.enroll(dto);
+    public String enroll(@RequestBody EnrollmentDto dto) {
+        service.enroll(dto);
+        return "the candidate has successfully enrolled for the session";
     }
 }

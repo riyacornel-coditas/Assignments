@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,4 +27,18 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "clientAdmin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Session> session = new ArrayList<>();
+
+    @OneToMany(mappedBy = "candidate", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Enrollment> enrollment = new ArrayList<>();
+
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Conference> conference = new ArrayList<>();
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Attendance> attendance = new ArrayList<>();
+
+
 }

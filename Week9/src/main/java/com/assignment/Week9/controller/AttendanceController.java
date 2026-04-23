@@ -15,7 +15,8 @@ public class AttendanceController {
     private final AttendanceService service;
 
     @PostMapping("/scan")
-    public String scan(@RequestBody AttendanceDto dto) {
+    public String scan(@RequestBody AttendanceDto dto)
+    {
         return service.markAttendance(dto.getQrData());
     }
 }

@@ -9,14 +9,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/session")
 @RequiredArgsConstructor
 public class SessionController {
     private final SessionService service;
 
-    @PostMapping
-    public Session create(@RequestBody SessionDto dto) {
-        return service.createSession(dto);
+    @PostMapping("/create")
+    public String create(@RequestBody SessionDto dto)
+    {
+        service.createSession(dto);
+        return "Session created successfully";
+    }
+
+    @PostMapping("/view")
+    public List<Session> view()
+    {
+        return service.viewSession();
     }
 }

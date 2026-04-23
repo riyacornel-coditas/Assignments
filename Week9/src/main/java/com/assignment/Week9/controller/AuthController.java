@@ -1,34 +1,40 @@
 package com.assignment.Week9.controller;
 
-import com.assignment.Week9.dto.UserDto;
-import com.assignment.Week9.entity.User;
-import com.assignment.Week9.repository.UserRepository;
+import com.assignment.Week9.dto.AuthenticateUser;
 import com.assignment.Week9.utility.JwtUtil;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
-@RequiredArgsConstructor
 public class AuthController {
-    private final UserRepository repo;
-    private final JwtUtil jwtUtil;
-    private final PasswordEncoder encoder;
 
-    @PostMapping("/login")
-    public String login(@RequestBody UserDto dto) {
+    @Autowired
+    private JwtUtil jwtUtil;
 
-        User user = repo.findByEmail(dto.getEmail())
-                .orElseThrow();
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-        if (encoder.matches(dto.getPassword(), user.getPassword())) {
-            return jwtUtil.generateToken(user.getEmail());
+    @PostMapping("/authenticate")
+    public String generateToken(@RequestBody AuthenticateUser authenticateUser)
+    {
+        try
+        {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticateUser.getName(),
+                            authenticateUser.getPassword())
+
+            );
+
+            return jwtUtil.generateToken(authenticateUser.getName());
         }
-
-        throw new RuntimeException("Invalid credentials");
+        catch (Exception e)
+        {
+            throw e;
+        }
     }
 }
