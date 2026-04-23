@@ -1,5 +1,6 @@
 package com.assignment.Week7.service;
 
+import com.assignment.Week7.beans.AddCoursesRequestBean;
 import com.assignment.Week7.entity.Course;
 import com.assignment.Week7.entity.Instructor;
 import com.assignment.Week7.entity.InstructorProfile;
@@ -37,7 +38,7 @@ public class InstructorService {
                 .orElseThrow(() -> new EntityNotFoundException("Instructor not found"));
 
         instructor.setInstructorProfile(instructorProfile);
-
+//check if already exists
         return instructorProfileRepository.save(instructorProfile);
 
     }
@@ -109,11 +110,11 @@ public class InstructorService {
     }
 
     @Transactional
-    public Instructor addCoursesToInstructor(Long instructorId, List<Course> courses) {
-        Instructor instructor = instructorRepository.findById(instructorId)
+    public Instructor addCoursesToInstructor(AddCoursesRequestBean requestBean) {
+        Instructor instructor = instructorRepository.findById(requestBean.getInstructorId())
                 .orElseThrow(() -> new EntityNotFoundException("Instructor not found"));
 
-        for(Course c: courses) {
+        for(Course c: requestBean.getCourses()) {
             instructor.addCourse(c);
         }
 

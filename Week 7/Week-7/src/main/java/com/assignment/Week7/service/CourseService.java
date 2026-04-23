@@ -1,5 +1,6 @@
 package com.assignment.Week7.service;
 
+import com.assignment.Week7.beans.AddReviewsRequestBean;
 import com.assignment.Week7.entity.Course;
 import com.assignment.Week7.entity.Instructor;
 import com.assignment.Week7.entity.Review;
@@ -50,16 +51,13 @@ public class CourseService {
     }
 
     @Transactional
-    public Course addReviewsToCourse(Long courseId , List<Review> reviews) {
-        Course course = courseRepository.findById(courseId)
+    public Course addReviewsToCourse(AddReviewsRequestBean requestBean) {
+        Course course = courseRepository.findById(requestBean.getCourseId())
                 .orElseThrow(() -> new EntityNotFoundException("Course not found"));
 
-//        Review r1 = new Review();
-//        r1.setRating("Excellent course");
-        for(Review r:reviews) {
+        for(Review r: course.getReviews()) {
             course.addReview(r);
         }
-//        course.addReview(r1);
 
         return courseRepository.save(course);
 

@@ -1,5 +1,6 @@
 package com.assignment.Week7.controller;
 
+import com.assignment.Week7.beans.AddCoursesRequestBean;
 import com.assignment.Week7.entity.Course;
 import com.assignment.Week7.entity.Instructor;
 import com.assignment.Week7.entity.InstructorProfile;
@@ -42,7 +43,7 @@ public class InstructorController {
 
     }
 
-    @PostMapping("/{instructorId}/profile/{profileId}")
+    @PostMapping("/{instructorId}/profile/{profileId}")// not needed also skip ids
     public Instructor assignProfile(@PathVariable Long instructorId,
                                     @PathVariable Long profileId)
     {
@@ -63,9 +64,9 @@ public class InstructorController {
     }
 
     @PostMapping("/{instructorId}/courses")
-    public  Instructor addCourses(@PathVariable Long instructorId,
-                             @RequestBody List<Course> courses)
+    public  Instructor addCourses(@RequestBody AddCoursesRequestBean requestBean)
     {
-        return instructorService.addCoursesToInstructor(instructorId, courses);
-    }
+        return instructorService.addCoursesToInstructor(requestBean);
+    }// to add the instructor id in json payload
+    //addcoursesrequestbean
 }

@@ -1,5 +1,6 @@
 package com.assignment.Week7.controller;
 
+import com.assignment.Week7.beans.AddReviewsRequestBean;
 import com.assignment.Week7.entity.Course;
 import com.assignment.Week7.entity.Review;
 import com.assignment.Week7.service.CourseService;
@@ -42,10 +43,9 @@ public class CourseController {
     }
 
     @PostMapping("/{courseId}/reviews")
-    public Course addReviews(@PathVariable Long courseId,
-                             @RequestBody List<Review> reviews)
+    public Course addReviews(AddReviewsRequestBean requestBean)
     {
-        return courseService.addReviewsToCourse(courseId, reviews);
+        return courseService.addReviewsToCourse(requestBean);
     }
 
     @DeleteMapping("/{courseId}")
