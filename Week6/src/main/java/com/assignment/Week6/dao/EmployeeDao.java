@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
-public interface EmployeeDao {
+public interface EmployeeDao extends JpaRepository<Employee, Integer> {
 
 
 
