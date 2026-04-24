@@ -15,7 +15,7 @@ public class ActivityLoggingAspect {
 
     private final ActivityLogStore logStore;
 
-    @After("execution(* com.assignment.Week8.service.*.*(..))")
+    @After("execution(* com.interview.ps.*.*.*(..))")
     public void logActivity(JoinPoint joinPoint)
     {
         String methodName = joinPoint.getSignature().getName();
