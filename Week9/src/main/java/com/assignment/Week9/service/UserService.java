@@ -25,6 +25,7 @@ public class UserService {
 
         repo.save(user);
     }
+    //create utility and check if it has authority to do tasks
 
     public void createAdmin(UserDto dto) {
         User user = new User();
