@@ -26,7 +26,7 @@ public class Conference {
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "adminId")
-    private User admin;
+    private User admin; //must be user
 
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Session> session = new ArrayList<>();

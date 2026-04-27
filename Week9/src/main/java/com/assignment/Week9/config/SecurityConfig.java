@@ -29,12 +29,12 @@ public class SecurityConfig {
 
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers("/users/**").permitAll()
-                        .requestMatchers("/conference/create").permitAll() //hasRole("ADMIN")
+                        .requestMatchers("/conference/create").hasRole("ADMIN")
                         .requestMatchers("/conference/view").permitAll()
-                        .requestMatchers("/session/create").permitAll() //hasRole("CLIENT_ADMIN")
+                        .requestMatchers("/session/create").hasRole("CLIENT_ADMIN")
                         .requestMatchers("/session/view").permitAll()
-                        .requestMatchers("/enroll").permitAll() //hasRole("CANDIDATE")
-                        .requestMatchers("/attendance/scan").permitAll() //hasRole("CLIENT_ADMIN")
+                        .requestMatchers("/enroll").hasRole("CANDIDATE")
+                        .requestMatchers("/attendance/scan").hasRole("CLIENT_ADMIN")
 
                         .anyRequest().authenticated()
                 )

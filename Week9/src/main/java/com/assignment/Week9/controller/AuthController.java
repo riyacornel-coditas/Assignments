@@ -38,3 +38,6 @@ public class AuthController {
         }
     }
 }
+
+// admin: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWEiLCJpYXQiOjE3NzcyNDkwNTEsImV4cCI6MTc3NzI1MjY1MX0.DSQC7tnE_pn7OoX0DNCQODiKJA-6cPm6pTv700QuTqE
+
