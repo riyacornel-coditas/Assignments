@@ -1,0 +1,13 @@
+package com.project.first.requestdto;
+
+import lombok.Data;
+
+@Data
+public class ManagementDto {
+
+    private String name;
+
+    private String password;
+
+
+}

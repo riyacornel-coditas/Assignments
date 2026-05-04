@@ -1,10 +1,7 @@
 package com.project.first.entity;
 
 import com.project.first.enums.SubmissionStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Submission {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
     @Enumerated(EnumType.STRING)
