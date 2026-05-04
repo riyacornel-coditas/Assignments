@@ -23,14 +23,11 @@ public class Course {
 
     private String title;
 
-    private Duration duration;
+    private Long duration;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
-
-    @Enumerated(EnumType.STRING)
-    private CourseStatus courseStatus;
 
     @ManyToOne
     private Company company;

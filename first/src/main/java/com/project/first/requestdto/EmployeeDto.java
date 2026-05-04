@@ -15,4 +15,9 @@ public class EmployeeDto {
 
     @Enumerated(EnumType.STRING)
     private String status;
+
+    private Long companyId;
+
+    private Long courseId;
+
 }

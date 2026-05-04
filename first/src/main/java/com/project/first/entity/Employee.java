@@ -1,5 +1,6 @@
 package com.project.first.entity;
 
+import com.project.first.enums.CourseStatus;
 import com.project.first.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,4 +33,7 @@ public class Employee {
 
     @ManyToOne
     private Course course;
+
+    @Enumerated(EnumType.STRING)
+    private CourseStatus courseStatus;
 }

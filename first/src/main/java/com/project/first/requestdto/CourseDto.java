@@ -10,11 +10,10 @@ public class CourseDto {
 
     private String title;
 
-    private Duration duration;
+    private Long duration;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    private String courseStatus;
 }
