@@ -3,10 +3,7 @@ package com.project.first.requestdto;
 import lombok.Data;
 
 @Data
-public class CompanyDto {
-
+public class AssignCourseDto {
+    private String title;
     private String name;
-
-    private String type;
-
 }

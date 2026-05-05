@@ -7,6 +7,7 @@ import com.project.first.enums.Status;
 import com.project.first.repository.CompanyRepository;
 import com.project.first.repository.CourseRepository;
 import com.project.first.repository.EmployeeRepository;
+import com.project.first.requestdto.AssignCourseDto;
 import com.project.first.requestdto.CourseDto;
 import com.project.first.requestdto.EmployeeDto;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,23 +20,29 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
     private final CompanyRepository companyRepository;
-    private final EmployeeRepository employeeRepository;
 
-    public void addCourse(CourseDto courseDto, Long id)
+    public void addCourse(CourseDto courseDto)
     {
-        Company company = companyRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
-
-        if(companyRepository.existsById(id)) {
             Course c = new Course();
             c.setTitle(courseDto.getTitle());
             c.setDuration(courseDto.getDuration());
             c.setStartDate(courseDto.getStartDate());
             c.setEndDate(courseDto.getEndDate());
-            c.setCompany(company);
             courseRepository.save(c);
-        }
+
     }
 
 
+    public void assignCourseToCompany(AssignCourseDto assignCourseDto) {
+
+        Course c = courseRepository.findByTitle(assignCourseDto.getTitle())
+                .orElseThrow(()-> new EntityNotFoundException("Course not added!"));
+
+        Company company = companyRepository.findByName(assignCourseDto.getName())
+                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
+
+        company.setCourse(c);
+
+        companyRepository.save(company);
+    }
 }

@@ -1,7 +1,11 @@
 package com.project.first.repository;
 
+import com.project.first.entity.Company;
 import com.project.first.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface CourseRepository extends JpaRepository<Course, Long> {
+    Optional<Course> findByTitle(String title);
 }

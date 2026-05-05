@@ -1,8 +1,7 @@
 package com.project.first.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.project.first.enums.CompanyStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,4 +21,11 @@ public class Company {
     private String name;
 
     private String type;
+
+    @Enumerated(EnumType.STRING)
+    private CompanyStatus companyStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 }
