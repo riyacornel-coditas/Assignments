@@ -1,6 +1,5 @@
 package com.project.first.service;
 
-import com.project.first.entity.Management;
 import com.project.first.repository.ManagementRepository;
 import com.project.first.requestdto.ManagementDto;
 import lombok.RequiredArgsConstructor;

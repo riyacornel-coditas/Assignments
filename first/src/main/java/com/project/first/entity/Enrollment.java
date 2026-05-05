@@ -1,8 +1,7 @@
 package com.project.first.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.project.first.enums.EnrollmentStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,14 @@ public class Enrollment {
     @GeneratedValue
     private Long id;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private EnrollmentStatus status;
 
     private Long attempt_count;
+
+    @ManyToOne
+    private Employee employee;
+
+    @ManyToOne
+    private Course course;
 }

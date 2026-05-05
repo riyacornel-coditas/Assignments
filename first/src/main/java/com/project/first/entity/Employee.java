@@ -1,6 +1,6 @@
 package com.project.first.entity;
 
-import com.project.first.enums.CourseStatus;
+import com.project.first.enums.EnrollmentStatus;
 import com.project.first.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,9 +31,10 @@ public class Employee {
     @ManyToOne
     private Company company;
 
-    @ManyToOne
-    private Course course;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
 
-    @Enumerated(EnumType.STRING)
-    private CourseStatus courseStatus;
+    private boolean certified = false;
+
 }

@@ -1,8 +1,7 @@
 package com.project.first.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.project.first.enums.Role;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Management {
+public class Users {
 
     @Id
     @GeneratedValue
@@ -21,8 +20,10 @@ public class Management {
 
     private String name;
 
+    private String email;
+
     private String password;
 
-
-
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

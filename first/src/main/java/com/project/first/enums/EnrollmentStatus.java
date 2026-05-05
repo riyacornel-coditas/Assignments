@@ -1,6 +1,6 @@
 package com.project.first.enums;
 
-public enum CourseStatus {
-    ONGOING,
+public enum EnrollmentStatus {
+    IN_PROGRESS,
     COMPLETED
 }

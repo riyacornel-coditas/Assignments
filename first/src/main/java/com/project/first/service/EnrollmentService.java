@@ -23,12 +23,7 @@ public class EnrollmentService {
         Course c = courseRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Course not found"));
 
         Enrollment e = new Enrollment();
-        e.setName(employeeDto.getName());
-        e.setEmail(employeeDto.getEmail());
-        e.setPassword(employeeDto.getPassword());
-        e.setStatus(Status.valueOf(employeeDto.getStatus()));
-        e.setCourse(c);
-        employeeRepository.save(e);
+        e.setStatus();
 
     }
 }
