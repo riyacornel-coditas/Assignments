@@ -15,11 +15,11 @@ public class UserController {
 
     private final CustomUserDetailsService customUserDetailsService;
 
-    @PostMapping("/add")
-    public String addUser(@RequestBody AddUserDto addUserDto)
+    @PostMapping("/add/admin")
+    public String addAdmin(@RequestBody AddUserDto addUserDto)
     {
-        customUserDetailsService.addUser(addUserDto);
-        return "User created successfully";
+        customUserDetailsService.addAdmin(addUserDto);
+        return "Admin created successfully";
     }
 
 }

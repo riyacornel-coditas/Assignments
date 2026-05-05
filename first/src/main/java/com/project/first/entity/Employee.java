@@ -31,10 +31,6 @@ public class Employee {
     @ManyToOne
     private Company company;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
-
     private boolean certified = false;
 
 }

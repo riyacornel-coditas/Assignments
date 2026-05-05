@@ -18,6 +18,5 @@ public class EmployeeDto {
 
     private Long companyId;
 
-    private Long courseId;
 
 }

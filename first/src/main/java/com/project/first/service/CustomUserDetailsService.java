@@ -1,5 +1,7 @@
 package com.project.first.service;
 
+import com.project.first.entity.Users;
+import com.project.first.enums.Role;
 import com.project.first.repository.UserDetailsRepository;
 import com.project.first.requestdto.AddUserDto;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,13 @@ public class CustomUserDetailsService {
     private final UserDetailsRepository userDetailsRepository;
 
 
-    public void addUser(AddUserDto addUserDto) {
+    public void addAdmin(AddUserDto addUserDto) {
+        Users u = new Users();
+        u.setName(addUserDto.getUsername());
+        u.setPassword(addUserDto.getPassword());
+        u.setEmail(addUserDto.getEmail());
+        u.setRole(Role.ADMIN);
+
+        userDetailsRepository.save(u);
     }
 }

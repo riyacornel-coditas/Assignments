@@ -11,5 +11,4 @@ public class AddUserDto {
 
     private String password;
 
-    private Role role;
 }
