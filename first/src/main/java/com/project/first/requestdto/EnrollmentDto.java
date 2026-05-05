@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class EnrollmentDto {
     private Long employeeId;
-    private Long courseId;
+    private String name;
+    private String title;
 }
