@@ -1,12 +1,17 @@
 package com.project.first.service;
 
+import com.project.first.entity.Company;
+import com.project.first.entity.Employee;
 import com.project.first.enums.Status;
+import com.project.first.repository.CompanyRepository;
 import com.project.first.repository.EmployeeRepository;
 import com.project.first.repository.SubmissionRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -14,16 +19,24 @@ import java.util.Map;
 public class DashboardService {
 
     private final EmployeeRepository employeeRepository;
+    private final CompanyRepository companyRepository;
 
-    public Map<String, Long> getDashboard()
+    public Map<String, Long> getDashboard(String name)
     {
-        Long enrolled = employeeRepository.count();
+        Company c = companyRepository.findByName(name)
+                .orElseThrow(()->new EntityNotFoundException("Company not found"));
 
-        Long active = employeeRepository.findAll().stream()
+//        Long enrolled = employeeRepository.findByCompany(c.getName()).stream().count();
+
+        List<Employee> employees = employeeRepository.findByCompany(c.getName());
+
+        Long enrolled = (long) employees.size();
+
+        Long active = employees.stream()
                 .filter(e-> e.getStatus() == Status.ACTIVE)
                 .count();
 
-        Long bench = employeeRepository.findAll().stream()
+        Long bench = employees.stream()
                 .filter(e -> e.getStatus() == Status.BENCH)
                 .count();
 

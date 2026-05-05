@@ -1,7 +1,12 @@
 package com.project.first.repository;
 
+import com.project.first.entity.Company;
 import com.project.first.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    List<Employee> findByCompany(String name);
 }
