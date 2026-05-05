@@ -3,10 +3,7 @@ package com.project.first.controller;
 import com.project.first.requestdto.EmployeeDto;
 import com.project.first.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/employee")
@@ -21,4 +18,6 @@ public class EmployeeController {
         employeeService.addEmployee(employeeDto);
         return "Employee added successfully";
     }
+
+
 }

@@ -20,10 +20,5 @@ public class CourseController {
         return "Course added successfully";
     }
 
-    @PostMapping("/enroll/into/course/{id}")
-    public String enrollIntoCourse(@RequestBody EmployeeDto employeeDto, @PathVariable Long id)
-    {
-        courseService.enrollIntoCourse(employeeDto,id);
-        return "The employee has successfully enrolled into the course";
-    }
+
 }

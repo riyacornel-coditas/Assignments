@@ -37,17 +37,5 @@ public class CourseService {
         }
     }
 
-    public void enrollIntoCourse(EmployeeDto employeeDto, Long id) {
 
-        Course c = courseRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Course not found"));
-
-        Employee e = new Employee();
-        e.setName(employeeDto.getName());
-        e.setEmail(employeeDto.getEmail());
-        e.setPassword(employeeDto.getPassword());
-        e.setStatus(Status.valueOf(employeeDto.getStatus()));
-        e.setCourse(c);
-        employeeRepository.save(e);
-
-    }
 }

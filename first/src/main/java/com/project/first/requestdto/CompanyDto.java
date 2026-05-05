@@ -8,4 +8,6 @@ public class CompanyDto {
     private String name;
 
     private String type;
+
+    private Role role;
 }
