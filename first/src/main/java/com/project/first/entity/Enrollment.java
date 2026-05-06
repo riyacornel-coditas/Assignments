@@ -24,8 +24,10 @@ public class Enrollment {
     private Integer attempt_count = 0;
 
     @ManyToOne
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     @ManyToOne
+    @JoinColumn(name = "courseId")
     private Course course;
 }

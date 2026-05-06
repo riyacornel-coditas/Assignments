@@ -27,6 +27,9 @@ public class Course {
 
     private LocalDate endDate;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "companyId")
     private Company company;
+
+    @OneToOne(mappedBy = "courseId")
+    private Assignment assignment;
 }

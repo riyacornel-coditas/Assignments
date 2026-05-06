@@ -23,6 +23,7 @@ public class Submission {
     private SubmissionStatus submissionStatus;
 
     @ManyToOne
+    @JoinColumn(name="assignmentId")
     private Assignment assignment;
 
     @ManyToOne
@@ -30,7 +31,7 @@ public class Submission {
 
     private String solutionLink;
 
-   private EnrollmentStatus enrollmentStatus;
+//   private EnrollmentStatus enrollmentStatus;
 
 
 
