@@ -52,7 +52,7 @@ public class SubmissionService {
             if(evaluateDto.getSubmissionStatus()==SubmissionStatus.PASSED)
             {
                 s.setSubmissionStatus(SubmissionStatus.PASSED);
-                s.setEnrollmentStatus(EnrollmentStatus.COMPLETED);
+//                s.setEnrollmentStatus(EnrollmentStatus.COMPLETED);
                 e.setCertified(true);
             }
             else

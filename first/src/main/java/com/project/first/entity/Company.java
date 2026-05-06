@@ -32,6 +32,6 @@ public class Company {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private List<Employee> employee = new ArrayList<>();
 }

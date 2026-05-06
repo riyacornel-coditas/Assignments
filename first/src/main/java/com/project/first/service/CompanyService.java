@@ -6,6 +6,7 @@ import com.project.first.enums.CompanyStatus;
 import com.project.first.repository.CompanyRepository;
 import com.project.first.requestdto.CompanyDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +19,17 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public void addCompany(CompanyDto companyDto)
+    @Transactional
+    public void addCompany(List<CompanyDto> companyDtos)
     {
         List<Company> companies = new ArrayList<>();
-        for(Company c : companyDto.getCompanies())
+
+        for(CompanyDto c : companyDtos)
         {
             Company company = new Company();
             company.setName(c.getName());
             company.setType(c.getType());
-            company.setCompanyStatus(c.getCompanyStatus());
+            company.setCompanyStatus(CompanyStatus.ACTIVE);
 
             companies.add(company);
 
@@ -46,17 +49,25 @@ public class CompanyService {
                 .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
         c.setCompanyStatus(CompanyStatus.INACTIVE);
+        companyRepository.save(c);
     }
 
 
-    public CompanyDto getAll() {
+    public List<CompanyDto> getAll() {
     List<Company> companies = companyRepository.findAll();
 
-    CompanyDto dto = new CompanyDto();
-    dto.setCompanies(companies);
-    return dto;
+    List<CompanyDto> dtos = new ArrayList<>();
 
+    for(Company c: companies) {
+        CompanyDto dto = new CompanyDto();
+        dto.setName(c.getName());
+        dto.setType(c.getType());
+
+        dtos.add(dto);
     }
+    return dtos;
+    }
+
 
     public Company get(Long id) {
         Company c = companyRepository.findById(id)

@@ -6,6 +6,8 @@ import com.project.first.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/company")
 @RequiredArgsConstructor
@@ -14,9 +16,9 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping("/add")
-    public String addCompany(@RequestBody CompanyDto companyDto)
+    public String addCompany(@RequestBody List<CompanyDto> companyDtos)
     {
-        companyService.addCompany(companyDto);
+        companyService.addCompany(companyDtos);
         return "Company added successfully";
     }
 
@@ -28,7 +30,7 @@ public class CompanyController {
     }
 
     @GetMapping("/get/all")
-    public CompanyDto getAll()
+    public List<CompanyDto> getAll()
     {
         return companyService.getAll();
     }

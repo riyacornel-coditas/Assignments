@@ -24,21 +24,22 @@ public class EmployeeService {
     private final CompanyRepository companyRepository;
 
 
-    public void addEmployee(EmployeeDto employeeDto, String name)
+    public void addEmployee(List<EmployeeDto> employeeDtos, String name)
     {
         Company c = companyRepository.findByName(name)
                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
         List<Employee> employees = new ArrayList<>();
 
-        for(Employee e: employeeDto.getEmployees())
+        for(EmployeeDto e: employeeDtos)
         {
             Employee employee = new Employee();
             employee.setName(e.getName());
             employee.setEmail(e.getEmail());
             employee.setPassword(e.getPassword());
-            employee.setCompany(e.getCompany());
+            employee.setCompany(c);
             employee.setCertified(e.isCertified());
+            employee.setStatus(e.getStatus());
 
             employees.add(employee);
         }
@@ -60,13 +61,23 @@ public class EmployeeService {
 
     }
 
-    public EmployeeDto getAll() {
+    public List<EmployeeDto> getAll() {
         List<Employee> employees = employeeRepository.findAll();
 
-        EmployeeDto dto = new EmployeeDto();
-        dto.setEmployees(employees);
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        for(Employee e: employees) {
+            EmployeeDto dto = new EmployeeDto();
+            dto.setName(e.getName());
+            dto.setEmail(e.getEmail());
+            dto.setPassword(e.getPassword());
+            dto.setStatus(e.getStatus());
+            dto.setCompanyName(e.getCompany());
+            dto.setCertified(e.isCertified());
 
-        return dto;
+            employeeDtos.add(dto);
+        }
+
+        return employeeDtos;
     }
 
     public Employee get(Long id) {

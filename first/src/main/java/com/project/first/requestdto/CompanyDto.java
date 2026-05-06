@@ -8,10 +8,8 @@ import java.util.List;
 @Data
 public class CompanyDto {
 
-    List<Company> companies;
+    private String name;
 
-//    private String name;
-//
-//    private String type;
+    private String type;
 
 }

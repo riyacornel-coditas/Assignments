@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,9 +29,9 @@ public class Course {
 
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "companyId")
-    private Company company;
+    @OneToMany(mappedBy = "course")
+    private List<Company> company = new ArrayList<>();
 
-    @OneToOne(mappedBy = "courseId")
+    @OneToOne(mappedBy = "course")
     private Assignment assignment;
 }
