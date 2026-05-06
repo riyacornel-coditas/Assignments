@@ -13,6 +13,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
@@ -21,20 +24,55 @@ public class EmployeeService {
     private final CompanyRepository companyRepository;
 
 
-    public void addEmployee(EmployeeDto employeeDto)
+    public void addEmployee(EmployeeDto employeeDto, String name)
     {
-        Company c = companyRepository.findByName(employeeDto.getCompanyName())
-                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
+        Company c = companyRepository.findByName(name)
+               .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
-        Employee e = new Employee();
-        e.setName(employeeDto.getName());
-        e.setEmail(employeeDto.getEmail());
-        e.setPassword(employeeDto.getPassword());
-        e.setStatus(Status.valueOf(employeeDto.getStatus()));
-        e.setCertified(employeeDto.isCertified());
-        e.setCompany(c);
+        List<Employee> employees = new ArrayList<>();
 
-        employeeRepository.save(e);
+        for(Employee e: employeeDto.getEmployees())
+        {
+            Employee employee = new Employee();
+            employee.setName(e.getName());
+            employee.setEmail(e.getEmail());
+            employee.setPassword(e.getPassword());
+            employee.setCompany(e.getCompany());
+            employee.setCertified(e.isCertified());
 
+            employees.add(employee);
+        }
+
+        employeeRepository.saveAll(employees);
+
+//        Company c = companyRepository.findByName(employeeDto.getCompanyName())
+//                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
+//
+//        Employee e = new Employee();
+//        e.setName(employeeDto.getName());
+//        e.setEmail(employeeDto.getEmail());
+//        e.setPassword(employeeDto.getPassword());
+//        e.setStatus(Status.valueOf(employeeDto.getStatus()));
+//        e.setCertified(employeeDto.isCertified());
+//        e.setCompany(c);
+//
+//        employeeRepository.save(e);
+
+    }
+
+    public EmployeeDto getAll() {
+        List<Employee> employees = employeeRepository.findAll();
+
+        EmployeeDto dto = new EmployeeDto();
+        dto.setEmployees(employees);
+
+        return dto;
+    }
+
+    public Employee get(Long id) {
+        Employee e = employeeRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Employee not found"));
+
+        return e;
     }
 }

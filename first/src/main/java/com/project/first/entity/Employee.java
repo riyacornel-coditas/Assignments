@@ -29,6 +29,7 @@ public class Employee {
     private Status status;
 
     @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
 
     @Column(name = "certified")
