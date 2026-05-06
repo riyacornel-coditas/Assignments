@@ -1,12 +1,17 @@
 package com.project.first.requestdto;
 
+import com.project.first.entity.Company;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class CompanyDto {
 
-    private String name;
+    List<Company> companies;
 
-    private String type;
+//    private String name;
+//
+//    private String type;
 
 }

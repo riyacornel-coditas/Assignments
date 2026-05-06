@@ -9,6 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
@@ -17,11 +20,24 @@ public class CompanyService {
 
     public void addCompany(CompanyDto companyDto)
     {
-        Company c = new Company();
-        c.setName(companyDto.getName());
-        c.setType(companyDto.getType());
-        c.setCompanyStatus(CompanyStatus.ACTIVE);
-        companyRepository.save(c);
+        List<Company> companies = new ArrayList<>();
+        for(Company c : companyDto.getCompanies())
+        {
+            Company company = new Company();
+            company.setName(c.getName());
+            company.setType(c.getType());
+            company.setCompanyStatus(c.getCompanyStatus());
+
+            companies.add(company);
+
+        }
+        companyRepository.saveAll(companies);
+
+//        Company c = new Company();
+//        c.setName(companyDto.getName());
+//        c.setType(companyDto.getType());
+//        c.setCompanyStatus(CompanyStatus.ACTIVE);
+//        companyRepository.save(c);
     }
 
     public void removeCompany(Long id) {
@@ -30,5 +46,22 @@ public class CompanyService {
                 .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
         c.setCompanyStatus(CompanyStatus.INACTIVE);
+    }
+
+
+    public CompanyDto getAll() {
+    List<Company> companies = companyRepository.findAll();
+
+    CompanyDto dto = new CompanyDto();
+    dto.setCompanies(companies);
+    return dto;
+
+    }
+
+    public Company get(Long id) {
+        Company c = companyRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
+
+        return c;
     }
 }
