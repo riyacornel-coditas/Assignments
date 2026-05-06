@@ -3,9 +3,12 @@ package com.project.first.service;
 import com.project.first.entity.Assignment;
 import com.project.first.entity.Employee;
 import com.project.first.entity.Submission;
+import com.project.first.enums.EnrollmentStatus;
+import com.project.first.enums.SubmissionStatus;
 import com.project.first.repository.AssignmentRepository;
 import com.project.first.repository.EmployeeRepository;
 import com.project.first.repository.SubmissionRepository;
+import com.project.first.requestdto.EvaluateDto;
 import com.project.first.requestdto.SubmissionDto;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +35,35 @@ public class SubmissionService {
         s.setAssignment(a);
         s.setEmployee(e);
         s.setSolutionLink(submissionDto.getSolutionLink());
+        s.setSubmissionStatus(SubmissionStatus.PENDING);
+        e.setCertified(false);
+        employeeRepository.save(e);
         submissionRepository.save(s);
+    }
+
+    public String evaluate(Long id, EvaluateDto evaluateDto) {
+        Submission s = submissionRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Submission for assignment not found"));
+
+            Employee e = s.getEmployee();
+
+        if(s.getSubmissionStatus()==SubmissionStatus.PENDING)
+        {
+            if(evaluateDto.getSubmissionStatus()==SubmissionStatus.PASSED)
+            {
+                s.setSubmissionStatus(SubmissionStatus.PASSED);
+                s.setEnrollmentStatus(EnrollmentStatus.COMPLETED);
+                e.setCertified(true);
+            }
+            else
+            {
+                s.setSubmissionStatus(SubmissionStatus.FAILED);
+            }
+            submissionRepository.save(s);
+        }
+
+            return "Assignment already evaluated";
+
+
     }
 }

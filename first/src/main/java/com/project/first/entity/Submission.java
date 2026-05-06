@@ -1,5 +1,6 @@
 package com.project.first.entity;
 
+import com.project.first.enums.EnrollmentStatus;
 import com.project.first.enums.SubmissionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,10 @@ public class Submission {
     private Employee employee;
 
     private String solutionLink;
+
+    private EnrollmentStatus enrollmentStatus;
+
+
 
 
 }

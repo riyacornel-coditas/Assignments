@@ -31,6 +31,7 @@ public class Employee {
     @ManyToOne
     private Company company;
 
+    @Column(name = "certified")
     private boolean certified = false;
 
 }

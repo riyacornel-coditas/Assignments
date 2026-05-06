@@ -21,7 +21,7 @@ public class Enrollment {
     @Enumerated(EnumType.STRING)
     private EnrollmentStatus status;
 
-    private Long attempt_count;
+    private Integer attempt_count = 0;
 
     @ManyToOne
     private Employee employee;

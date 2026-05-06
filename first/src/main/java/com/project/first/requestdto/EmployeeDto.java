@@ -16,7 +16,9 @@ public class EmployeeDto {
     @Enumerated(EnumType.STRING)
     private String status;
 
-    private Long companyId;
+    private String companyName;
+
+    private boolean certified;
 
 
 }

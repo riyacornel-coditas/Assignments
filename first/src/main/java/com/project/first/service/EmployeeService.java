@@ -23,7 +23,7 @@ public class EmployeeService {
 
     public void addEmployee(EmployeeDto employeeDto)
     {
-        Company c = companyRepository.findById(employeeDto.getCompanyId())
+        Company c = companyRepository.findByName(employeeDto.getCompanyName())
                 .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
         Employee e = new Employee();
@@ -31,6 +31,7 @@ public class EmployeeService {
         e.setEmail(employeeDto.getEmail());
         e.setPassword(employeeDto.getPassword());
         e.setStatus(Status.valueOf(employeeDto.getStatus()));
+        e.setCertified(employeeDto.isCertified());
         e.setCompany(c);
 
         employeeRepository.save(e);

@@ -1,12 +1,10 @@
 package com.project.first.controller;
 
+import com.project.first.requestdto.EvaluateDto;
 import com.project.first.requestdto.SubmissionDto;
 import com.project.first.service.SubmissionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/submission")
@@ -20,6 +18,12 @@ public class SubmissionController {
     {
         submissionService.makeSubmission(submissionDto);
         return "Submission done successfully";
+    }
+
+    @PatchMapping("/evaluate/{id}")
+    public String evaluate(@PathVariable Long id, @RequestBody EvaluateDto evaluateDto)
+    {
+        return submissionService.evaluate(id, evaluateDto);
     }
 
 }

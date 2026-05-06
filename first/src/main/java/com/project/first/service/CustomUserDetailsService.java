@@ -16,7 +16,7 @@ public class CustomUserDetailsService {
 
     public void addAdmin(AddUserDto addUserDto) {
         Users u = new Users();
-        u.setName(addUserDto.getUsername());
+        u.setName(addUserDto.getName());
         u.setPassword(addUserDto.getPassword());
         u.setEmail(addUserDto.getEmail());
         u.setRole(Role.ADMIN);
