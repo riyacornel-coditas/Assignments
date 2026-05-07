@@ -24,9 +24,9 @@ public class EmployeeService {
     private final CompanyRepository companyRepository;
 
 
-    public void addEmployee(List<EmployeeDto> employeeDtos, String name)
+    public void addEmployeeToCompany(List<EmployeeDto> employeeDtos, String companyName)
     {
-        Company c = companyRepository.findByName(name)
+        Company c = companyRepository.findByName(companyName)
                .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
         List<Employee> employees = new ArrayList<>();
@@ -62,7 +62,7 @@ public class EmployeeService {
 
     }
 
-    public List<EmployeeDto> getAll() {
+    public List<EmployeeDto> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
 
         List<EmployeeDto> employeeDtos = new ArrayList<>();
@@ -81,8 +81,8 @@ public class EmployeeService {
         return employeeDtos;
     }
 
-    public Employee get(Long id) {
-        Employee e = employeeRepository.findById(id)
+    public Employee getEmployeeById(Long employeeId) {
+        Employee e = employeeRepository.findById(employeeId)
                 .orElseThrow(()-> new EntityNotFoundException("Employee not found"));
 
         return e;

@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 @RestController
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/add/company/{name}")
-    public String addEmployee(@Valid @RequestBody List<EmployeeDto> employeeDtos, @PathVariable String name)
+    @PostMapping("/companies/{companyName}")
+    public String addEmployeeToCompany(@Valid @RequestBody List<EmployeeDto> employeeDtos, @PathVariable String companyName)
     {
-        employeeService.addEmployee(employeeDtos, name);
+        employeeService.addEmployeeToCompany(employeeDtos, companyName);
         return "Employees added successfully";
     }
 
-    @GetMapping("/get/all")
-    public List<EmployeeDto> getAll()
+    @GetMapping
+    public List<EmployeeDto> getAllEmployees()
     {
-        return employeeService.getAll();
+        return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/get/by/id/{id}")
-    public Employee get(@PathVariable Long id)
+    @GetMapping("/{employeeId}")
+    public Employee getEmployeeById(@PathVariable Long employeeId)
     {
-        return employeeService.get(id);
+        return employeeService.getEmployeeById(employeeId);
     }
 
 

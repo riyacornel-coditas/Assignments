@@ -43,9 +43,9 @@ public class CompanyService {
 //        companyRepository.save(c);
 //    }
 
-    public void removeCompany(Long id) {
+    public void inactivateCompany(Long companyId) {
 
-        Company c = companyRepository.findById(id)
+        Company c = companyRepository.findById(companyId)
                 .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
         c.setCompanyStatus(CompanyStatus.INACTIVE);
@@ -53,7 +53,7 @@ public class CompanyService {
     }
 
 
-    public List<CompanyDto> getAll() {
+    public List<CompanyDto> getAllCompanies() {
     List<Company> companies = companyRepository.findAll();
 
     List<CompanyDto> dtos = new ArrayList<>();
@@ -69,7 +69,7 @@ public class CompanyService {
     }
 
 
-    public Company get(Long id) {
+    public Company getCompanyById(Long id) {
         Company c = companyRepository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 

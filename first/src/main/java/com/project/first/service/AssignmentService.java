@@ -16,11 +16,11 @@ public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
     private final CourseRepository courseRepository;
 
-    public void addAssignment(String title, AssignmentDto assignmentDto)
+    public void addAssignmentToCourse(String courseTitle, AssignmentDto assignmentDto)
     {
 
 
-        Course course = courseRepository.findByTitle(title).orElseThrow(()-> new EntityNotFoundException("Course not found"));
+        Course course = courseRepository.findByTitle(courseTitle).orElseThrow(()-> new EntityNotFoundException("Course not found"));
 
         if(assignmentRepository.existsByCourse(course))
         {

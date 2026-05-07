@@ -8,16 +8,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/assignment")
+@RequestMapping("/assignments")
 @RequiredArgsConstructor
 public class AssignmentController {
 
     private final AssignmentService assignmentService;
 
-    @PostMapping("/add/to/course/{title}")
-    public String addAssignment(@PathVariable String title,@Valid @RequestBody AssignmentDto assignmentDto)
+    @PostMapping("/course/{courseTitle}")
+    public String addAssignment(@PathVariable String courseTitle,@Valid @RequestBody AssignmentDto assignmentDto)
     {
-        assignmentService.addAssignment(title, assignmentDto);
+        assignmentService.addAssignmentToCourse(courseTitle, assignmentDto);
         return "Assignment for course added successfully";
     }
 }

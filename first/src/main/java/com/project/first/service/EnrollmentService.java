@@ -22,7 +22,7 @@ public class EnrollmentService {
     private final CompanyRepository companyRepository;
     private final EnrollmentRepository enrollmentRepository;
 
-    public void enrollIntoCourse(EnrollmentDto enrollmentDto) {
+    public void enrollEmployeeIntoCourse(EnrollmentDto enrollmentDto) {
 
         Course c = courseRepository.findByTitle(enrollmentDto.getTitle())
                 .orElseThrow(()-> new EntityNotFoundException("Course not found"));

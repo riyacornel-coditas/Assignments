@@ -8,17 +8,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/submission")
+@RequestMapping("/submissions")
 @RequiredArgsConstructor
 public class SubmissionController {
 
     private final SubmissionService submissionService;
 
-    @PostMapping("/make")
-    public String makeSubmission(@Valid @RequestBody SubmissionDto submissionDto)
+    @PostMapping
+    public String createSubmission(@Valid @RequestBody SubmissionDto submissionDto)
     {
-        submissionService.makeSubmission(submissionDto);
-        return "Submission evaluated";
+        submissionService.createSubmission(submissionDto);
+        return "Submission created and evaluated successfully";
     }
 //
 //    @PatchMapping("/evaluate/{id}")

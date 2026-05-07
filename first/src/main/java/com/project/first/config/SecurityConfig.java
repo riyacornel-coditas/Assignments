@@ -41,14 +41,14 @@ public class SecurityConfig {
         http
                 .authenticationProvider(authProvider)
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers("/users/add").hasAnyRole("ADMIN", "COMPANY")
+                        .requestMatchers("/users/add").permitAll()      //how will admin add company through same endpoint
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers("/users/view/**").hasRole("ADMIN")
                         .requestMatchers("/submission/make").permitAll()
                         .requestMatchers("/enroll/employee").permitAll()
                         .requestMatchers("/employee/add/**").hasRole("COMPANY")
                         .requestMatchers("/employee/get/**").permitAll()
-                        .requestMatchers("/courses/**").hasRole("COMPANY")
+                        .requestMatchers("/courses/**").hasRole("ADMIN")
                         .requestMatchers("/company/**").hasRole("ADMIN")
                         .requestMatchers("/assignment/**").hasRole("ADMIN")
                 );

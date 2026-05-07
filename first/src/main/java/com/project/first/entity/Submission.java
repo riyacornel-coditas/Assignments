@@ -27,6 +27,7 @@ public class Submission {
     private Assignment assignment;
 
     @ManyToOne
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     private String solutionLink;

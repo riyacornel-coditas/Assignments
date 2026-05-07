@@ -17,17 +17,17 @@ public class UserController {
     private final CustomUserDetailsService customUserDetailsService;
     private final DashboardService dashboardService;
 
-    @PostMapping("/add")
-    public String add(@Valid @RequestBody AddUserDto addUserDto)
+    @PostMapping
+    public String createUser(@Valid @RequestBody AddUserDto addUserDto)
     {
-        customUserDetailsService.add(addUserDto);
+        customUserDetailsService.createUser(addUserDto);
         return "User created successfully";
     }
 
-    @GetMapping("/view/dashboard/{name}")
-    public Map<String, Long> view(@PathVariable String name)
+    @GetMapping("/{companyName}/dashboard")
+    public Map<String, Long> getCompanyDashboard(@PathVariable String companyName)
     {
-        return dashboardService.getDashboard(name);
+        return dashboardService.getCompanyDashboard(companyName);
     }
 
 }

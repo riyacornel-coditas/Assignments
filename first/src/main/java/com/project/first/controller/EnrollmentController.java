@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/enroll")
+@RequestMapping("/enrollments")
 @RequiredArgsConstructor
 public class EnrollmentController {
 
     private final EnrollmentService enrollmentService;
 
-    @PostMapping("/employee")
-    public void enroll(@Valid @RequestBody EnrollmentDto enrollmentDto)
+    @PostMapping("/employees")
+    public String enrollEmployeeIntoCourse(@Valid @RequestBody EnrollmentDto enrollmentDto)
     {
-        enrollmentService.enrollIntoCourse(enrollmentDto);
+        enrollmentService.enrollEmployeeIntoCourse(enrollmentDto);
+        return "Employee has been successfully enrolled into the course";
 
     }
 

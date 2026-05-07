@@ -25,6 +25,8 @@ public class Company {
 
     private String type;
 
+    private String password;
+
     @Enumerated(EnumType.STRING)
     private CompanyStatus companyStatus;
 

@@ -28,16 +28,32 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String name) {
 
         Users user = userDetailsRepository.findByName(name)
-                .orElseThrow(()->new UsernameNotFoundException("User not found"));
+                .orElse(null);
 
-        return org.springframework.security.core.userdetails.User
-                .builder()
-                .username(user.getName())
-                .password(user.getPassword())
-                .build();
+        if(user!=null) {
+            return org.springframework.security.core.userdetails.User
+                    .builder()
+                    .username(user.getName())
+                    .password(user.getPassword())
+                    .roles(user.getRole().name())
+                    .build();
+        }
+
+        Company company = companyRepository.findByName(name).orElse(null);
+
+        if(company!=null)
+        {
+            return org.springframework.security.core.userdetails.User
+                    .builder()
+                    .username(company.getName())
+                    .password(company.getPassword())
+                    .roles("COMPANY")
+                    .build();
+        }
+        throw new UsernameNotFoundException("User not found");
     }
 
-    public void add(AddUserDto addUserDto) {
+    public void createUser(AddUserDto addUserDto) {
 
 
         Role role = Role.valueOf(addUserDto.getRole());
@@ -46,6 +62,17 @@ public class CustomUserDetailsService implements UserDetailsService {
             if(userDetailsRepository.findByEmail(addUserDto.getEmail()).isPresent())
             {
                 throw new RuntimeException("email already exists");
+            }
+            if(addUserDto.getName() == null || addUserDto.getName().isBlank()) {
+                throw new RuntimeException("name is required");
+            }
+
+            if(addUserDto.getPassword() == null || addUserDto.getPassword().isBlank()) {
+                throw new RuntimeException("password is required");
+            }
+
+            if(addUserDto.getEmail() == null || addUserDto.getEmail().isBlank()) {
+                throw new RuntimeException("email is required");
             }
             Users u = new Users();
             u.setName(addUserDto.getName());
@@ -62,10 +89,23 @@ public class CustomUserDetailsService implements UserDetailsService {
             {
                 throw new RuntimeException("Company already exists");
             }
+            if(addUserDto.getCompanyName() == null || addUserDto.getCompanyName().isBlank()) {
+                throw new RuntimeException("companyName is required");
+            }
+
+            if(addUserDto.getCompanyType() == null || addUserDto.getCompanyType().isBlank()) {
+                throw new RuntimeException("companyType is required");
+            }
+
+            if(addUserDto.getPassword() == null || addUserDto.getPassword().isBlank()) {
+                throw new RuntimeException("password is required");
+            }
+
             Company c = new Company();
             c.setName(addUserDto.getCompanyName());
             c.setType(addUserDto.getCompanyType());
             c.setCompanyStatus(CompanyStatus.ACTIVE);
+            c.setPassword(passwordEncoder.encode(addUserDto.getPassword()));
 
             companyRepository.save(c);
         }

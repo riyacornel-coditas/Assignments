@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/company")
+@RequestMapping("/companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
@@ -22,23 +22,23 @@ public class CompanyController {
 //        return "Company added successfully";
 //    }
 
-    @PostMapping("/remove/{id}")
-    public String removeCompany(@PathVariable Long id)
+    @DeleteMapping("/{companyId}")
+    public String inactivateCompany(@PathVariable Long companyId)
     {
-        companyService.removeCompany(id);
+        companyService.inactivateCompany(companyId);
         return "Company has been removed from the services";
     }
 
-    @GetMapping("/get/all")
-    public List<CompanyDto> getAll()
+    @GetMapping
+    public List<CompanyDto> getAllCompanies()
     {
-        return companyService.getAll();
+        return companyService.getAllCompanies();
     }
 
-    @GetMapping("/get/by/id/{id}")
-    public Company get(@PathVariable Long id)
+    @GetMapping("/{companyId}")
+    public Company getCompanyById(@PathVariable Long companyId)
     {
-        return companyService.get(id);
+        return companyService.getCompanyById(companyId);
     }
 
 

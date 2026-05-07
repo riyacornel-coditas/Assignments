@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class ActivityLoggingAspect {
     private final ActivityLogStore logStore;
 
-    @After("execution(* com.assignment.Week8.service.*.*(..))")
+    @After("execution(* com.project.first.service.*.*(..))")
     public void logActivity(JoinPoint joinPoint)
     {
         String methodName = joinPoint.getSignature().getName();

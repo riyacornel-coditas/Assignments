@@ -9,16 +9,16 @@ import lombok.Data;
 @Data
 public class AddUserDto {
 
-    @NotBlank(message = "name is required")
+//    @NotBlank(message = "name is required")
     private String name;
 
-    @Email(message = "invalid email")
+//    @Email(message = "invalid email")
     private String email;
 
-    @NotBlank(message = "password is required")
+//    @NotBlank(message = "password is required")
     private String password;
 
-    @NotBlank(message = "role is required")
+//    @NotBlank(message = "role is required")
     private String role;
 
     private String companyName;

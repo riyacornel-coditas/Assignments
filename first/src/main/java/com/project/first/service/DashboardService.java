@@ -28,9 +28,9 @@ public class DashboardService {
     private final EnrollmentRepository enrollmentRepository;
     private final SubmissionRepository submissionRepository;
 
-    public Map<String, Long> getDashboard(String name)
+    public Map<String, Long> getCompanyDashboard(String companyName)
     {
-        Company c = companyRepository.findByName(name)
+        Company c = companyRepository.findByName(companyName)
                 .orElseThrow(()->new EntityNotFoundException("Company not found"));
 
 

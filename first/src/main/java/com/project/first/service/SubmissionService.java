@@ -25,7 +25,7 @@ public class SubmissionService {
     private final AssignmentRepository assignmentRepository;
     private final EnrollmentRepository enrollmentRepository;
 
-    public void makeSubmission(SubmissionDto submissionDto)
+    public void createSubmission(SubmissionDto submissionDto)
     {
         if(!submissionDto.getSolutionLink().startsWith("http"))
         {

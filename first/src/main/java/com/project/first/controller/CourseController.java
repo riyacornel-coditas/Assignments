@@ -15,14 +15,14 @@ public class CourseController {
 
     private final CourseService courseService;
 
-    @PostMapping("/add")
+    @PostMapping
     public String addCourse(@Valid @RequestBody CourseDto courseDto)
     {
         courseService.addCourse(courseDto);
         return "Course added successfully";
     }
 
-    @PostMapping("/assign")
+    @PostMapping("/assign-company")
     public String assignCourseToCompany(@Valid @RequestBody AssignCourseDto assignCourseDto)
     {
         courseService.assignCourseToCompany(assignCourseDto);
