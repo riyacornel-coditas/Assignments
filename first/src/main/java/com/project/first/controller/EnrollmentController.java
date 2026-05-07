@@ -2,6 +2,7 @@ package com.project.first.controller;
 
 import com.project.first.requestdto.EnrollmentDto;
 import com.project.first.service.EnrollmentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class EnrollmentController {
     private final EnrollmentService enrollmentService;
 
     @PostMapping("/employee")
-    public void enroll(@RequestBody EnrollmentDto enrollmentDto)
+    public void enroll(@Valid @RequestBody EnrollmentDto enrollmentDto)
     {
         enrollmentService.enrollIntoCourse(enrollmentDto);
 

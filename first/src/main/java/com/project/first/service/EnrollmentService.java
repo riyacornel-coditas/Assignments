@@ -34,11 +34,15 @@ public class EnrollmentService {
                 .orElseThrow(()-> new EntityNotFoundException("Employee not found"));
 
 
+        if(enrollmentRepository.existsByEmployeeIdAndCourseId(e.getId(), c.getId()))
+        {
+            throw new RuntimeException("Employee already enrolled");
+        }
+
         Enrollment enrollment = new Enrollment();
         enrollment.setCourse(c);
         enrollment.setEmployee(e);
         enrollment.setStatus(EnrollmentStatus.IN_PROGRESS);
-        enrollment.setAttempt_count(enrollment.getAttempt_count()+1);
 
         enrollmentRepository.save(enrollment);
 

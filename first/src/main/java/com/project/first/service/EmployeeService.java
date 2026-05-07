@@ -34,6 +34,7 @@ public class EmployeeService {
         for(EmployeeDto e: employeeDtos)
         {
             Employee employee = new Employee();
+
             employee.setName(e.getName());
             employee.setEmail(e.getEmail());
             employee.setPassword(e.getPassword());
@@ -71,7 +72,7 @@ public class EmployeeService {
             dto.setEmail(e.getEmail());
             dto.setPassword(e.getPassword());
             dto.setStatus(e.getStatus());
-            dto.setCompanyName(e.getCompany());
+            dto.setCompanyName(e.getCompany().getName());
             dto.setCertified(e.isCertified());
 
             employeeDtos.add(dto);

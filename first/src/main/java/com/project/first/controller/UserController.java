@@ -3,6 +3,7 @@ package com.project.first.controller;
 import com.project.first.requestdto.AddUserDto;
 import com.project.first.service.CustomUserDetailsService;
 import com.project.first.service.DashboardService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,11 @@ public class UserController {
     private final CustomUserDetailsService customUserDetailsService;
     private final DashboardService dashboardService;
 
-    @PostMapping("/add/admin")
-    public String addAdmin(@RequestBody AddUserDto addUserDto)
+    @PostMapping("/add")
+    public String add(@Valid @RequestBody AddUserDto addUserDto)
     {
-        customUserDetailsService.addAdmin(addUserDto);
-        return "Admin created successfully";
+        customUserDetailsService.add(addUserDto);
+        return "User created successfully";
     }
 
     @GetMapping("/view/dashboard/{name}")

@@ -19,29 +19,29 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    @Transactional
-    public void addCompany(List<CompanyDto> companyDtos)
-    {
-        List<Company> companies = new ArrayList<>();
-
-        for(CompanyDto c : companyDtos)
-        {
-            Company company = new Company();
-            company.setName(c.getName());
-            company.setType(c.getType());
-            company.setCompanyStatus(CompanyStatus.ACTIVE);
-
-            companies.add(company);
-
-        }
-        companyRepository.saveAll(companies);
+//    @Transactional
+//    public void addCompany(List<CompanyDto> companyDtos)
+//    {
+//        List<Company> companies = new ArrayList<>();
+//
+//        for(CompanyDto c : companyDtos)
+//        {
+//            Company company = new Company();
+//            company.setName(c.getName());
+//            company.setType(c.getType());
+//            company.setCompanyStatus(CompanyStatus.ACTIVE);
+//
+//            companies.add(company);
+//
+//        }
+//        companyRepository.saveAll(companies);
 
 //        Company c = new Company();
 //        c.setName(companyDto.getName());
 //        c.setType(companyDto.getType());
 //        c.setCompanyStatus(CompanyStatus.ACTIVE);
 //        companyRepository.save(c);
-    }
+//    }
 
     public void removeCompany(Long id) {
 

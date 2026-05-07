@@ -3,6 +3,7 @@ package com.project.first.controller;
 import com.project.first.entity.Employee;
 import com.project.first.requestdto.EmployeeDto;
 import com.project.first.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,8 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/add/to/company/{name}")
-    public String addEmployee(@RequestBody List<EmployeeDto> employeeDtos, @PathVariable String name)
+    @PostMapping("/add/company/{name}")
+    public String addEmployee(@Valid @RequestBody List<EmployeeDto> employeeDtos, @PathVariable String name)
     {
         employeeService.addEmployee(employeeDtos, name);
         return "Employees added successfully";

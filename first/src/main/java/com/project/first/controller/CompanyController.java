@@ -15,12 +15,12 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    @PostMapping("/add")
-    public String addCompany(@RequestBody List<CompanyDto> companyDtos)
-    {
-        companyService.addCompany(companyDtos);
-        return "Company added successfully";
-    }
+//    @PostMapping("/add")
+//    public String addCompany(@RequestBody List<CompanyDto> companyDtos)
+//    {
+//        companyService.addCompany(companyDtos);
+//        return "Company added successfully";
+//    }
 
     @PostMapping("/remove/{id}")
     public String removeCompany(@PathVariable Long id)

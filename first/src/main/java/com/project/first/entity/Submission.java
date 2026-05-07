@@ -31,7 +31,9 @@ public class Submission {
 
     private String solutionLink;
 
-//   private EnrollmentStatus enrollmentStatus;
+    private Integer attempt_number = 0;
+
+
 
 
 

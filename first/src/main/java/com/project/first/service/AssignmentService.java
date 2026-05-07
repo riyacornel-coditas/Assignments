@@ -18,7 +18,14 @@ public class AssignmentService {
 
     public void addAssignment(String title, AssignmentDto assignmentDto)
     {
+
+
         Course course = courseRepository.findByTitle(title).orElseThrow(()-> new EntityNotFoundException("Course not found"));
+
+        if(assignmentRepository.existsByCourse(course))
+        {
+            throw new RuntimeException("assignment already exists for this course");
+        }
 
         Assignment a = new Assignment();
         a.setDescription(assignmentDto.getDescription());

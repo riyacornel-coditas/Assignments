@@ -39,6 +39,12 @@ public class DashboardService {
         List<Long> employeeIds = employees.stream()
                 .map(Employee::getId).toList();
 
+        List<Enrollment> enrollments = enrollmentRepository.findByEmployeeIdIn(employeeIds);
+
+        Long enrolledCount = enrollments.stream()
+                .map(e-> e.getEmployee().getId())
+                .distinct()
+                .count();
 
         Long active = employees.stream()
                 .filter(e-> e.getStatus() == Status.ACTIVE)
@@ -48,11 +54,19 @@ public class DashboardService {
                 .filter(e -> e.getStatus() == Status.BENCH)
                 .count();
 
+        List<Submission> submissions = submissionRepository.findByEmployeeIdIn(employeeIds);
+
+        Long certifiedCount = submissions.stream()
+                .filter(s->s.getSubmissionStatus() == SubmissionStatus.PASSED)
+                .count();
+
 
         Map<String, Long> info = new HashMap<>();
 
         info.put("active", active);
         info.put("bench", bench);
+        info.put("enrolled",enrolledCount);
+        info.put("certified",certifiedCount);
 
         return info;
 

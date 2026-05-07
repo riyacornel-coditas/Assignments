@@ -21,7 +21,6 @@ public class Enrollment {
     @Enumerated(EnumType.STRING)
     private EnrollmentStatus status;
 
-    private Integer attempt_count = 0;
 
     @ManyToOne
     @JoinColumn(name = "employeeId")

@@ -23,6 +23,10 @@ public class CourseService {
 
     public void addCourse(CourseDto courseDto)
     {
+        if(courseRepository.existsByTitle(courseDto.getTitle()))
+        {
+            throw new RuntimeException("Course already exists");
+        }
             Course c = new Course();
             c.setTitle(courseDto.getTitle());
             c.setDuration(courseDto.getDuration());
@@ -41,6 +45,10 @@ public class CourseService {
         Company company = companyRepository.findByName(assignCourseDto.getName())
                 .orElseThrow(()-> new EntityNotFoundException("Company not found"));
 
+        if(company.getCourse() != null)
+        {
+            throw new RuntimeException("course already assigned");
+        }
         company.setCourse(c);
 
         companyRepository.save(company);

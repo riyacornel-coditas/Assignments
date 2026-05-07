@@ -10,4 +10,10 @@ import java.util.Optional;
 
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
+
+    List<Enrollment> findByEmployeeIdIn(List<Long> employeeIds);
+
+    Optional<Enrollment> findByEmployeeIdAndCourseId(Long id, Long id1);
+
+    boolean existsByEmployeeIdAndCourseId(Long employeeId, Long courseId);
 }
