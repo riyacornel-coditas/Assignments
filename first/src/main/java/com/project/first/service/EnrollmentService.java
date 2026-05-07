@@ -10,6 +10,7 @@ import com.project.first.repository.*;
 import com.project.first.requestdto.EmployeeDto;
 import com.project.first.requestdto.EnrollmentDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class EnrollmentService {
     private final CompanyRepository companyRepository;
     private final EnrollmentRepository enrollmentRepository;
 
+    @Transactional
     public void enrollEmployeeIntoCourse(EnrollmentDto enrollmentDto) {
 
         Course c = courseRepository.findByTitle(enrollmentDto.getTitle())

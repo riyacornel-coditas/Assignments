@@ -13,6 +13,7 @@ import com.project.first.repository.SubmissionRepository;
 import com.project.first.requestdto.EvaluateDto;
 import com.project.first.requestdto.SubmissionDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class SubmissionService {
     private final AssignmentRepository assignmentRepository;
     private final EnrollmentRepository enrollmentRepository;
 
+    @Transactional
     public void createSubmission(SubmissionDto submissionDto)
     {
         if(!submissionDto.getSolutionLink().startsWith("http"))

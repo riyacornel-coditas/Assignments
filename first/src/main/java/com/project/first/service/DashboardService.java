@@ -12,6 +12,7 @@ import com.project.first.repository.EmployeeRepository;
 import com.project.first.repository.EnrollmentRepository;
 import com.project.first.repository.SubmissionRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class DashboardService {
     private final EnrollmentRepository enrollmentRepository;
     private final SubmissionRepository submissionRepository;
 
+    @Transactional
     public Map<String, Long> getCompanyDashboard(String companyName)
     {
         Company c = companyRepository.findByName(companyName)

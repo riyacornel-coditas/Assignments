@@ -10,6 +10,7 @@ import com.project.first.repository.EmployeeRepository;
 import com.project.first.repository.UserDetailsRepository;
 import com.project.first.requestdto.EmployeeDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
 
-
+    @Transactional
     public void addEmployeeToCompany(List<EmployeeDto> employeeDtos, String companyName)
     {
         Company c = companyRepository.findByName(companyName)

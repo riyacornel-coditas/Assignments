@@ -11,6 +11,7 @@ import com.project.first.requestdto.AssignCourseDto;
 import com.project.first.requestdto.CourseDto;
 import com.project.first.requestdto.EmployeeDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class CourseService {
     }
 
 
+    @Transactional
     public void assignCourseToCompany(AssignCourseDto assignCourseDto) {
 
         Course c = courseRepository.findByTitle(assignCourseDto.getTitle())

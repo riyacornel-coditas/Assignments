@@ -7,6 +7,7 @@ import com.project.first.enums.Role;
 import com.project.first.repository.CompanyRepository;
 import com.project.first.repository.UserDetailsRepository;
 import com.project.first.requestdto.AddUserDto;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserDetailsRepository userDetailsRepository;
     private final CompanyRepository companyRepository;
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String name) {
 
@@ -53,6 +55,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         throw new UsernameNotFoundException("User not found");
     }
 
+    @Transactional
     public void createUser(AddUserDto addUserDto) {
 
 

@@ -6,6 +6,7 @@ import com.project.first.repository.AssignmentRepository;
 import com.project.first.repository.CourseRepository;
 import com.project.first.requestdto.AssignmentDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
     private final CourseRepository courseRepository;
 
+    @Transactional
     public void addAssignmentToCourse(String courseTitle, AssignmentDto assignmentDto)
     {
 
