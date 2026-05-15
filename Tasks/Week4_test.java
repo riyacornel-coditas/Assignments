@@ -71,7 +71,7 @@ public class Week4_test {
         double totalRevenue = orders.stream()
                 .mapToDouble(Order::getDiscountedAmount)
                 .sum();
-        System.out.println("Total Revenue: " + totalRevenue);
+        System.out.println("Total R: " + totalRevenue);
 
         List<Order> premiumOrders = orders.stream()
                 .filter(o -> o.amount() > 5000)
